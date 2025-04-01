@@ -1,0 +1,67 @@
+[
+    {
+        "model": "catalog.product",
+        "pk": 2,
+        "fields": {
+            "name": "Батон",
+            "description": "Мягкий продолговатый, в основном для бутербродов и тостов",
+            "photo": "",
+            "category": 3,
+            "price": 55,
+            "created_at": "2025-04-02",
+            "updated_at": "2025-04-02",
+        },
+    },
+    {
+        "model": "catalog.product",
+        "pk": 3,
+        "fields": {
+            "name": "Хлеб белый",
+            "description": "Стандартная буханка белого хлеба, с использованем дрожжей",
+            "photo": "",
+            "category": 3,
+            "price": 55,
+            "created_at": "2025-04-01",
+            "updated_at": "2025-04-01",
+        },
+    },
+    {
+        "model": "catalog.product",
+        "pk": 5,
+        "fields": {
+            "name": "Молоко",
+            "description": "Молоко цельное из коровьего молока",
+            "photo": "",
+            "category": 2,
+            "price": 136,
+            "created_at": "2025-04-01",
+            "updated_at": "2025-04-01",
+        },
+    },
+    {
+        "model": "catalog.product",
+        "pk": 6,
+        "fields": {
+            "name": "Творог",
+            "description": "Кисломолочный продукт из коровьего молока",
+            "photo": "",
+            "category": 2,
+            "price": 239,
+            "created_at": "2025-03-31",
+            "updated_at": "2025-03-31",
+        },
+    },
+    {
+        "model": "catalog.product",
+        "pk": 7,
+        "fields": {
+            "name": "Российский сыр",
+            "description": "Кисломолочный продукт из коровьего молока",
+            "photo": "",
+            "category": 2,
+            "price": 450,
+            "created_at": "2025-03-27",
+            "updated_at": "2025-03-27",
+        },
+    },
+]
