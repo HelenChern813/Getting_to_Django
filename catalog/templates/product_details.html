@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Продукт {{ product.name }} {% endblock %}
+
+{% block content %}
+<div class="row mt-5 pt-5">
+    <h1 class="text-center pb-5"> Вы на странице продукта: {{ product.name }} </h1>
+</div>
+<div class="row text-center mt-2">
+    <p> Подродна информация о продукте:</p>
+    <ul class="list-group">
+        <li class="list-group-item">Наименование товара: {{ product.name }}</li>
+        <li class="list-group-item">Описание: {{ product.description }}</li>
+        <li class="list-group-item">Изображение {{ product.photo }}
+            <img src="{{ catalog.photo.url }}" alt="{{ product.name }}">
+        </li>
+        <li class="list-group-item">Категория: {{ product.category }}</li>
+        <li class="list-group-item">Цена за покупку: {{ product.price }}</li>
+        <li class="list-group-item">Дата создания: {{ product.created_at }}</li>
+        <li class="list-group-item">Дата последнего изменения: {{ product.updated_at }}</li>
+    </ul>
+</div>
+{% endblock %}
