@@ -4,46 +4,19 @@
 
 {% block content %}
 <div class="row mt-5 pt-5">
-          <h1 class="text-center"> Главная </h1>
-            <h6 class="text-center text-secondary"> Вы находитесь на сайте, предназнаенном для продажи товаров.  </h6>
-        </div>
-        <div class="row text-center mt-2">
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        Товар
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">$ Стоимость</h4>
-                        <p class="card-text">Описание товара</p>
-                        <a href="#" class="btn btn-primary">Купить!</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        Товар
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">$ Стоимость</h4>
-                        <p class="card-text">Описание товара</p>
-                        <a href="#" class="btn btn-primary">Купить!</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        Товар
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">$ Стоимость</h4>
-                        <p class="card-text">Описание товара</p>
-                        <a href="#" class="btn btn-primary">Купить!</a>
-                    </div>
-                </div>
-            </div>
+    <h1 class="text-center"> Главная </h1>
+    <h6 class="text-center text-secondary"> Вы находитесь на сайте, предназнаенном для продажи товаров.  </h6>
+</div>
+<div>Список всех товаров</div>
+<div>
+            <ul class="list-group">
+            {% for product in products %}
+                <li class="list-group-item d-flex justify-content-between align-items-center {% if student.year == 'first' %}list-group-item-primary{% elif student.year == 'second' %}list-group-item-success{% elif student.year == 'third' %}list-group-item-warning{% elif student.year == 'fourth' %}list-group-item-danger{% endif %}">
+                    {{ product |truncatechars:100}}
 
-        </div>
+                </li>
+            {% endfor %}
+        </ul>
+</div>
+
 {% endblock %}
