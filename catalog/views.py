@@ -15,11 +15,11 @@ def contacts(request):
     return render(request, "contacts.html")
 
 
-def product_list(request, id_product):
+def product_details(request, product_id):
 
-    product = Product.objects.get(id=id_product)
+    product = Product.objects.get(id=product_id)
 
     context = {
         'product': product
     }
-    return render(request, 'product_list.html', context)
+    return render(request, 'product_details.html', context)
