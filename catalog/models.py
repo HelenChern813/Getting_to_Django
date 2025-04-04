@@ -19,8 +19,8 @@ class Product(models.Model):
         "Category", on_delete=models.SET_NULL, blank=True, null=True, verbose_name="Категория"
     )
     price = models.IntegerField(verbose_name="Цена за покупку")
-    created_at = models.DateField(max_length=150, verbose_name="Дата создания")
-    updated_at = models.DateField(max_length=150, verbose_name="Дата последнего изменения")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения")
 
     def __str__(self):
         return f"{self.name} {self.description} {self.price}"
