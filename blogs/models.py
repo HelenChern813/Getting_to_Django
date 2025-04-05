@@ -18,7 +18,9 @@ class Blogs(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     is_activ = models.BooleanField(default=True, verbose_name="Признак публикации", help_text="Признак публикации")
-    count_views = models.IntegerField(blank=True, null=True, verbose_name="Количество просмотров", help_text="Количество просмотров")
+    views_count = models.PositiveIntegerField(
+        blank=True, null=True, verbose_name="Количество просмотров", help_text="Счетчик просмотров", default=0
+    )
     product = models.ForeignKey(
         catalog.models.Product, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="Продукт"
     )
