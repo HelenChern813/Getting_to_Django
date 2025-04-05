@@ -1,5 +1,7 @@
 from django.db import models
 
+import catalog.models
+
 
 class Blogs(models.Model):
     title = models.CharField(
@@ -17,6 +19,9 @@ class Blogs(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     is_activ = models.BooleanField(default=True, verbose_name="Признак публикации", help_text="Признак публикации")
     count_views = models.IntegerField(blank=True, null=True, verbose_name="Количество просмотров", help_text="Количество просмотров")
+    product = models.ForeignKey(
+        catalog.models.Product, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="Продукт"
+    )
 
     def __str__(self):
         return f"{self.title} {self.contents}"

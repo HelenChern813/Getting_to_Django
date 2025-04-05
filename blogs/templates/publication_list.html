@@ -14,6 +14,7 @@
         {% for blog in blogs %}
         <div class="card-header">
             <a href="{% url 'blogs:publication_detail' blog.pk %}"> {{ blog.title }} </a>
+            <p class="card-text">{{ blog.product }}</p>
         </div>
         <div class="card-body">
             <h4 class="card-title">

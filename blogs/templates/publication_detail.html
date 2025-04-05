@@ -8,6 +8,7 @@
     <p> Читайте о публикации подробнее:</p>
     <ul class="list-group">
         <li class="list-group-item">{{ blogs.title }}</li>
+        <li class="list-group-item">Продукт {{ blogs.product }}</li>
         <li class="list-group-item">Описание: {{ blogs.contents }}</li>
         <li class="list-group-item">Изображение {{ blogs.preview }}
             <img src="{{ blogs.photo.url }}" alt="{{ blogs.title }}">

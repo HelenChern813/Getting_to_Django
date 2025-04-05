@@ -6,7 +6,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 class BlogsCreateView(CreateView):
     model = Blogs
-    fields = ['title', 'contents', 'preview']
+    fields = ['title', 'product', 'contents', 'preview']
     template_name = 'publication_form.html'
     success_url = reverse_lazy('blogs:publication_list')
 
@@ -19,7 +19,7 @@ class BlogsDetailView(DetailView):
 
 class BlogsUpdateView(UpdateView):
     model = Blogs
-    fields = ['title', 'contents', 'preview']
+    fields = ['title', 'product', 'contents', 'preview']
     template_name = 'publication_form.html'
     success_url = reverse_lazy('blogs:publication_list')
 
