@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Список публикаций{% endblock %}
+
+{% block content %}
+<div class="row mt-5 pt-5">
+    <h1 class="text-center"> Комментарии о товарах </h1>
+    <h6 class="text-center text-secondary"> Почитайте комментарии о товарах от наших покупателей и/или создайте свой, мы будем очень рады!  </h6>
+    <a href="{% url 'blogs:publication_create' %}" class="btn btn-primary">Создать публикацию</a>
+</div>
+<div>Список всех публикаций</div>
+<div class="container mt-5">
+    <div class="card">
+        {% for blog in blogs %}
+        <div class="card-header">
+            <a href="{% url 'blogs:publication_detail' blog.pk %}"> {{ blog.title }} </a>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">
+                <img src="{{ blog.photo.url }}" alt="{{ blog.title }}">
+            </h4>
+            <p class="card-text">{{ blog.contents |truncatechars:100 }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
