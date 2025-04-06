@@ -31,7 +31,7 @@ class BlogsUpdateView(UpdateView):
     success_url = reverse_lazy("blogs:publication_list")
 
     def get_success_url(self):
-        return reverse("blogs:publication_detail", args=[self.kwargs.get("pk")])
+        return reverse("blogs:publication_detail", args=[self.object.pk])
 
 
 class BlogsDeleteView(DeleteView):
@@ -46,4 +46,4 @@ class BlogsListView(ListView):
     context_object_name = "blogs"
 
     def get_queryset(self):
-        return Blogs.objects.filter(is_activ=True)
+        return Blogs.objects.filter(is_active=True)

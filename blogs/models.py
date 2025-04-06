@@ -1,7 +1,5 @@
 from django.db import models
 
-import catalog.models
-
 
 class Blogs(models.Model):
     title = models.CharField(
@@ -17,12 +15,9 @@ class Blogs(models.Model):
         verbose_name="Изображение",
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
-    is_activ = models.BooleanField(default=True, verbose_name="Признак публикации", help_text="Признак публикации")
+    is_active = models.BooleanField(default=True, verbose_name="Признак публикации", help_text="Признак публикации")
     views_count = models.PositiveIntegerField(
         blank=True, null=True, verbose_name="Количество просмотров", help_text="Счетчик просмотров", default=0
-    )
-    product = models.ForeignKey(
-        catalog.models.Product, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="Продукт"
     )
 
     def __str__(self):

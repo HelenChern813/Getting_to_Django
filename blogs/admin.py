@@ -3,7 +3,7 @@ from .models import Blogs
 
 
 @admin.register(Blogs)
-class StudentAdmin(admin.ModelAdmin):
-    list_display = ("id", "title", "contents", "preview", "created_at", "is_activ", "views_count", "product")
+class BlogsAdmin(admin.ModelAdmin):
+    list_display = ("id", "title", "contents", "preview", "created_at", "is_active", "views_count")
     list_filter = ("title", "created_at")
-    search_fields = ("title", "contents", "created_at", "is_activ")
+    search_fields = ("title", "contents", "created_at", "is_active")
