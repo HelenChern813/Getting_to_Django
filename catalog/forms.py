@@ -45,9 +45,9 @@ class ProductForm(forms.ModelForm):
             "полиция",
             "радар",
         ]
-
-        if name.lower() in banned_list or description.lower() in banned_list:
-            raise ValidationError(
-                "В названии или описании не должны находиться запрещенные слова: казино, криптовалюта, крипта, биржа, дешево, бесплатно, обман, полиция, радар"
-            )
+        for i in banned_list:
+            if name.lower().count(i) > 0 or description.lower().count(i) > 0:
+                raise ValidationError(
+                    "В названии или описании не должны находиться запрещенные слова: казино, криптовалюта, крипта, биржа, дешево, бесплатно, обман, полиция, радар"
+                )
         return cleaned_data
