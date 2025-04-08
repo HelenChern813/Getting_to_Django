@@ -12,7 +12,8 @@
     <div class="card">
         {% for product in products %}
         <div class="card-header">
-            {{ product.name }}
+            <a href="{% url 'catalog:product_detail' product.pk %}">{{ product.name }}</a>
+            <img src="{{ catalog.photo.url }}">
         </div>
         <div class="card-body">
             <h4 class="card-title">{{ product.price }}</h4>

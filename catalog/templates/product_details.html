@@ -11,13 +11,17 @@
     <ul class="list-group">
         <li class="list-group-item">Наименование товара: {{ product.name }}</li>
         <li class="list-group-item">Описание: {{ product.description }}</li>
-        <li class="list-group-item">Изображение {{ product.photo }}
-            <img src="{{ catalog.photo.url }}" alt="{{ product.name }}">
+        <li class="list-group-item">Изображение
+            <img src="{{ catalog.photo.url }}">
         </li>
         <li class="list-group-item">Категория: {{ product.category }}</li>
         <li class="list-group-item">Цена за покупку: {{ product.price }}</li>
         <li class="list-group-item">Дата создания: {{ product.created_at }}</li>
         <li class="list-group-item">Дата последнего изменения: {{ product.updated_at }}</li>
+        <a href="{% url 'catalog:product_edit' product.pk %}" class="btn btn-secondary">Редактировать</a>
+        <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-danger">Удалить</a>
+        <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">Вернуться к списку</a>
+
     </ul>
 </div>
 {% endblock %}
