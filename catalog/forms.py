@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 from .models import Product
+from django.conf import settings
 
 
 class ProductForm(forms.ModelForm):
@@ -33,21 +34,10 @@ class ProductForm(forms.ModelForm):
         cleaned_data = super().clean()
         name = cleaned_data.get("name")
         description = cleaned_data.get("description")
-        banned_list = [
-            "казино",
-            "криптовалюта",
-            "крипта",
-            "биржа",
-            "дешево",
-            "дёшево",
-            "бесплатно",
-            "обман",
-            "полиция",
-            "радар",
-        ]
-        for i in banned_list:
+
+        for i in settings.BANNED_LIST:
             if name.lower().count(i) > 0 or description.lower().count(i) > 0:
                 raise ValidationError(
-                    "В названии или описании не должны находиться запрещенные слова: казино, криптовалюта, крипта, биржа, дешево, бесплатно, обман, полиция, радар"
+                    f"В названии или описании не должны находиться запрещенные слова: {settings.BANNED_LIST}"
                 )
         return cleaned_data
