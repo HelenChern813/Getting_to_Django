@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "catalog",
     "blogs",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,5 @@ BANNED_LIST =[
             "полиция",
             "радар",
         ]
+AUTH_USER_MODEL = 'users.CustomUser'
+LOGIN_REDIRECT_URL = 'catalog:product_list'

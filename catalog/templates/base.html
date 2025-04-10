@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,20 +23,6 @@
             {% block content %}{% endblock %}
         </div>
 
-    </div>
-</div>
-<div class="row me-1">
-    <div class="col-2 ps-3 bg-dark text-white border-top border-secondary">
-        <div class="dropdown">
-            <a class="btn btn-secondary dropdown-toggle bg-dark text-whit" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{% static 'utils/primer.png' %}" class="img-thumbnail rounded-circle w-25">
-                Пользователь
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Профиль</a></li>
-                <li><a class="dropdown-item" href="#">Выйти</a></li>
-            </ul>
-        </div>
     </div>
 </div>
 </body>
