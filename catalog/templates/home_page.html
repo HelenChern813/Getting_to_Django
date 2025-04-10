@@ -17,11 +17,7 @@
     <div class="card">
         {% for product in products %}
         <div class="card-header">
-            {% if user.is_authenticated %}
-                <a href="{% url 'catalog:product_detail' product.pk %}">{{ product.name }}</a>
-            {% else %}
-                <a href="{% url 'catalog:error_registrations' %}">{{ product.name }}</a>
-            {% endif %}
+            <a href="{% url 'catalog:product_detail' product.pk %}">{{ product.name }}</a>
             <img src="{{ catalog.photo.url }}">
         </div>
         <div class="card-body">
