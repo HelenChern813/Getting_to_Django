@@ -5,7 +5,12 @@
 {% block content %}
 <div class="row mt-5 pt-5">
     <h1 class="text-center"> Главная </h1>
-    <h6 class="text-center text-secondary"> Вы находитесь на сайте, предназнаенном для продажи товаров.  </h6>
+    <h5 class="text-center text-secondary"> Вы находитесь на сайте, предназнаенном для продажи товаров.  </h5>
+    {% if user.is_authenticated %}
+        <h5 class="text-center text-secondary">Добро пожаловать, {{ user.username }}</h5>
+    {% else %}
+        <h5 class="text-center text-secondary"> Для полного доступа к возможностям приложения не забудьте зарегистрироваться</h5>
+    {% endif %}
 </div>
 <div>Список всех товаров</div>
 <div class="container mt-5">
