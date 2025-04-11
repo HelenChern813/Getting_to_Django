@@ -19,9 +19,16 @@
         <li class="list-group-item">Дата создания: {{ product.created_at }}</li>
         <li class="list-group-item">Дата последнего изменения: {{ product.updated_at }}</li>
         <a href="{% url 'catalog:product_edit' product.pk %}" class="btn btn-secondary">Редактировать</a>
-        <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-danger">Удалить</a>
+        {% if "catalog.can_delete_product" in perms %}
+            <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-danger">Удалить</a>
+        {% endif %}
         <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">Вернуться к списку</a>
-
+        {% if "catalog.can_unpublish_product" in perms %}
+            <form action="{% url 'catalog:can_unpublish_product' product.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Отменить публикацию</button>
+            </form>
+        {% endif %}
     </ul>
 </div>
 {% endblock %}

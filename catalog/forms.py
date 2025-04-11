@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 
 from .models import Product
 from django.conf import settings
+import users.models
 
 
 class ProductForm(forms.ModelForm):
