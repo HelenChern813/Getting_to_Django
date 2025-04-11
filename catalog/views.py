@@ -1,25 +1,26 @@
-from catalog.models import Product
-from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, View
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .forms import ProductForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden
-from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, ListView, View
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
+from catalog.models import Product
+
+from .forms import ProductForm
 
 
 class EditPublishView(LoginRequiredMixin, View):
     def post(self, request, pk):
         product = get_object_or_404(Product, pk=pk)
 
-        if not request.user.has_perm('catalog.can_unpublish_product'):
+        if not request.user.has_perm("catalog.can_unpublish_product"):
             return HttpResponseForbidden("У вас нет прав для отмены публикации.")
 
         product.publish = False
         product.save()
 
-        return redirect('catalog:product_detail', pk=product.pk)
+        return redirect("catalog:product_detail", pk=product.pk)
 
 
 class ProductListView(ListView):
@@ -75,9 +76,7 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     def dispatch(self, request, *args, **kwargs):
         product = super().get_object()
 
-        if product.owner == self.request.user or request.user.has_perm(
-                "catalog.can_delete_product"
-        ):
+        if product.owner == self.request.user or request.user.has_perm("catalog.can_delete_product"):
             return super().dispatch(request, *args, **kwargs)
 
         return HttpResponseForbidden("Вы не можете удалить этот продукт.")
