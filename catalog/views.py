@@ -1,11 +1,15 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.cache import cache
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView, ListView, View
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from catalog.models import Product
+from catalog.models import Category, Product
+from catalog.services import products_by_category
 
 from .forms import ProductForm
 
@@ -28,7 +32,15 @@ class ProductListView(ListView):
     template_name = "home_page.html"
     context_object_name = "products"
 
+    def get_queryset(self):
+        queryset = cache.get("products_queryset")
+        if not queryset:
+            queryset = super().get_queryset()
+            cache.set("products_queryset", queryset, 60 * 15)
+        return queryset
 
+
+@method_decorator(cache_page(60 * 15), name="dispatch")
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = "product_details.html"
@@ -80,3 +92,20 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
             return super().dispatch(request, *args, **kwargs)
 
         return HttpResponseForbidden("Вы не можете удалить этот продукт.")
+
+
+class ProductByCategoryListView(ListView):
+    model = Product
+    template_name = "product_by_category_list.html"
+
+    def get_queryset(self):
+        category_id = self.request.GET.get("category")
+
+        return products_by_category(category_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        categories = Category.objects.all()
+        context["categories"] = categories
+
+        return context

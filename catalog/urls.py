@@ -2,8 +2,8 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from catalog.apps import CatalogConfig
-from catalog.views import (EditPublishView, ProductCreateView, ProductDeleteView, ProductDetailView, ProductListView,
-                           ProductUpdateView)
+from catalog.views import (EditPublishView, ProductByCategoryListView, ProductCreateView, ProductDeleteView,
+                           ProductDetailView, ProductListView, ProductUpdateView)
 
 app_name = CatalogConfig.name
 
@@ -20,4 +20,5 @@ urlpatterns = [
         name="error_registrations",
     ),
     path("product/unpublish_product/<int:pk>/", EditPublishView.as_view(), name="can_unpublish_product"),
+    path("product/category_products/", ProductByCategoryListView.as_view(), name="category_products"),
 ]

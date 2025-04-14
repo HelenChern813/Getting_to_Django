@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<div class="row mt-5 pt-5">
+    <h1 class="text-center"> Главная </h1>
+    <h5 class="text-center text-secondary"> Вы находитесь на сайте, предназнаенном для продажи товаров.  </h5>
+    {% if user.is_authenticated %}
+        <h5 class="text-center text-secondary">Добро пожаловать, {{ user.username }}</h5>
+    {% else %}
+        <h5 class="text-center text-secondary"> Для полного доступа к возможностям приложения не забудьте зарегистрироваться</h5>
+    {% endif %}
+</div>
+<div>
+    <form id="categoryForm" method="GET" action="{% url 'catalog:category_products' %}" class="d-flex justify-content-center mt-3">
+        <select class="form-select w-50" style="max-width: 33%;" name="category" onchange="this.form.submit()">
+            <option selected>Выберите категорию</option>
+            {% for category in categories %}
+            <option value="{{ category.pk }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+<div class="container mt-5">
+    <div class="card">
+        {% for product in object_list %}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+
+                <div class="card-header">
+
+                    <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
+
+                </div>
+                <div class="card-body">
+                    <p>Категория: {{ product.category }}</p>
+                    <img src="#" class="img-fluid" style="height: 12rem; object-fit: cover;">
+
+                    <p>{{ product.description|truncatechars:100 }}</p>
+
+                    <h3 class="card-title pricing-card-title">{{ product.price }}</h3>
+                    <div class="d-grid gap-1 col-10 mx-auto">
+
+                        {% if product.owner == user %}
+                            <a type="button" class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_edit' product.pk %}">Изменить товар</a>
+                        {% endif %}
+                        {% if 'catalog.can_unpublish_product' in perms or product.owner == user %}
+                            <a type="button" class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_delete' product.pk %}">Удалить</a>
+                        {% endif %}
+                        {% if 'catalog.can_unpublish_product' in perms %}
+                        <form action="{% url 'catalog:can_unpublish_product' product.pk %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Снять с публикации</button>
+                        </form>
+                        {% endif %}
+
+
+                    </div>
+
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
